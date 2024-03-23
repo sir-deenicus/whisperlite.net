@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34309.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "whisperlite.net", "whisperlite.net.csproj", "{86E24641-46B9-4A72-BF5C-5297F435B71C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86E24641-46B9-4A72-BF5C-5297F435B71C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86E24641-46B9-4A72-BF5C-5297F435B71C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86E24641-46B9-4A72-BF5C-5297F435B71C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86E24641-46B9-4A72-BF5C-5297F435B71C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F8CA3727-833D-4D40-B470-DEA5D15968F9}
+	EndGlobalSection
+EndGlobal
