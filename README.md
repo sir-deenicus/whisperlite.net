@@ -32,4 +32,4 @@ float[] samples2 = GetSecondAudioChunk(); // Replace with your method to get aud
 string transcription2 = whisper.TranscribeAudio(samples2, true); 
 ```
 
-Please note that the actual implementation of streaming needs to be handled externally. The `TranscribeAudio` method should be called appropriately to process the continuous audio data.
+Note: actual implementation of streaming needs to be handled externally. The `TranscribeAudio` method should be called appropriately to process the continuous audio data.
