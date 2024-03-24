@@ -1,6 +1,6 @@
 # WhisperLite
 
-Whisper is a barebones C# wrapper for `whisper.cpp`.
+A barebones C# wrapper for `whisper.cpp`.
 
 ## Usage
 
@@ -12,7 +12,13 @@ Whisper whisper = new Whisper("path_to_model_file", useGPU = false);
 
 // Initialize to default parameters
 whisper.InitToDefaultParameters();
+```
 
+## TranscribeAudio Method
+
+The TranscribeAudio method is a key function of the Whisper wrapper. It transcribes the provided audio samples into text.
+
+```csharp
 // Transcribe audio samples
 float[] samples = GetAudioSamples(); // Replace with your method to get audio samples
 string transcription = whisper.TranscribeAudio(samples);
@@ -20,16 +26,9 @@ string transcription = whisper.TranscribeAudio(samples);
 Console.WriteLine(transcription);
 ```
 
-For continuous audio data processing, set the `keepAudio` parameter to `true`. This retains a portion of the audio samples and transcription tokens from the current call for use in the next call, enabling streaming-type scenarios:
+The `TranscribeAudio` method takes two parameters:
 
-```csharp
-// Transcribe first chunk of audio
-float[] samples1 = GetFirstAudioChunk(); // Replace with your method to get audio chunks
-string transcription1 = whisper.TranscribeAudio(samples1, keepAudio = true);
-
-// Transcribe second chunk of audio
-float[] samples2 = GetSecondAudioChunk(); // Replace with your method to get audio chunks
-string transcription2 = whisper.TranscribeAudio(samples2, true); 
-```
-
-Note: actual implementation of streaming needs to be handled externally. The `TranscribeAudio` method should be called appropriately to process the continuous audio data.
+- `samples`: The audio samples to transcribe.
+- `keepAudio`: Optional parameter. If set to true, a portion of the audio samples and (all of) the most recent transcription tokens are retained for use in the next call. This facilitates continuous audio data processing, which should be useful for implementing streaming-like scenarios externally. Default value is false.
+ 
+*Note: actual implementation of streaming needs to be handled externally.*

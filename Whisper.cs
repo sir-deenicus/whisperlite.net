@@ -30,7 +30,13 @@ namespace WhisperLite.Net
                 return Marshal.PtrToStringAnsi(parameters.language);
             }
         }
-         
+
+        /// <summary>
+        /// Initializes a new instance of the Whisper class.
+        /// </summary>
+        /// <param name="path">The path to the model file.</param>
+        /// <param name="useGPU">Optional parameter. If set to true, GPU is used for processing. Default value is false.</param>
+        /// <param name="keepAudioSecs">Optional parameter. The length of audio data to keep for the next transcription, in seconds. Default value is 0.0f.</param> 
         public Whisper(string path, bool useGPU = false, float keepAudioSecs = 0.0f)
         {
             WhisperContextParams cparameters = NativeMethods.whisper_context_default_params();
@@ -46,12 +52,23 @@ namespace WhisperLite.Net
             prevAudioData = new float[keepSamplesLen];
         }
 
+        /// <summary>
+        /// Sets the length of audio data to keep for the next transcription.
+        /// </summary>
+        /// <param name="keepAudioSecs">The length of audio data to keep, in seconds.</param> 
         public void SetKeepAudioSecs(float keepAudioSecs)
         { 
             keepSamplesLen = (int)(keepAudioSecs * sampleRate);
             prevAudioData = new float[keepSamplesLen];
         }
 
+        /// <summary>
+        /// Initializes the Whisper instance to its default parameters.
+        /// </summary>
+        /// <param name="strategy">The sampling strategy to use. Default is WhisperSamplingStrategy.WhisperSamplingGreedy.</param>
+        /// <param name="DoTranslate">Whether to perform translation. Default is false.</param>
+        /// <param name="NumThreads">The number of threads to use. Default is 4.</param>
+        /// <param name="Language">The language to use for transcription. Default is "en".</param> 
         public void InitToDefaultParameters(WhisperSamplingStrategy strategy = WhisperSamplingStrategy.WhisperSamplingGreedy, bool DoTranslate = false, int NumThreads = 4, string Language = "en")
         {
             parameters = NativeMethods.whisper_full_default_params(strategy);  
@@ -60,6 +77,12 @@ namespace WhisperLite.Net
             parameters.language = Marshal.StringToHGlobalAnsi(Language);
         }
 
+        /// <summary>
+        /// Transcribes the provided audio samples into text.
+        /// </summary>
+        /// <param name="samples">The audio samples to transcribe.</param>
+        /// <param name="keepAudio">Optional parameter. If set to true, a portion of the audio samples and transcription tokens is retained for use in the next call. This facilitates continuous audio data processing, which is crucial for implementing streaming-like scenarios externally. Default value is false.</param>
+        /// <returns>The transcription of the audio samples as a string.</returns>
         public string TranscribeAudio(float[] samples, bool keepAudio = false)
         {  
             float[] audiosamples = (previousSamplesLen != 0) ? prevAudioData.Take(previousSamplesLen).Concat(samples).ToArray() : samples;
